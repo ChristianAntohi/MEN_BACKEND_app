@@ -1,31 +1,6 @@
-20230417	01:23:02	ead3eca2-9d70-415c-94f2-f83e39c64dfd	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:25:15	1e0111c9-533d-4056-8422-7ee7677c29d3	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:26:46	b1d5edbb-b437-4680-80e5-9583106ffb3b	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:27:07	7d326662-2804-469e-a26e-af1ca7a0441b	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:34	7bfcaf3f-8835-48d8-b085-30c528c5dd5d	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:41	6aab363a-3e5b-4e33-88f9-0663bd02487a	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:47	07458b85-6599-42f5-a36a-627109c0d3de	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:48	bb3daa35-0e8c-45cf-bb82-8b26b431699d	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:48	16f29b8c-3e18-4f62-87d8-96621e80d6db	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:48	d9196f28-7d0b-4214-838e-00321ae6f7c2	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:28:49	7ed4522c-774a-499a-b720-0b5feb602be3	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:30:56	e32935d8-42c5-4089-b461-d0dbbfe9d48a	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:31:32	29454c83-19f8-45eb-a2cf-bc508e8d254d	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:31:57	7cbd80c2-a107-4e92-9adc-51d2b91bc977	SyntaxError: Unexpected token e in JSON at position 0
-20230417	01:32:02	0563868d-61d1-4939-9c74-c161ee97a19e	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:33:00	41f960fc-e802-4ea7-93d6-044875acd618	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:38:07	41eed9c5-fbb2-4ff2-af84-200a6ffc659c	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:39:04	fb7a00d5-6877-40eb-8798-c303f4a32742	TypeError: Cannot read properties of undefined (reading 'Authorization')
-20230417	01:42:34	4b84c77b-f7ff-4f1e-82b6-561aba9c147b	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:47:19	641f3f58-a643-43db-b9e1-f6b35c197dbc	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:49:15	51f9fec7-2d6b-45cc-bf8d-3fe93859b380	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	01:54:10	2efe11f6-dba2-40bc-89c0-30f5c5aae9f9	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	02:04:26	53740d0b-f6dc-41bf-84dd-279b4d1df658	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	02:05:46	2cc3daa7-c823-4441-8fd9-19eabe75b16a	ReferenceError: authorization is not defined
-20230417	02:06:42	0bf2cacb-08ca-45a1-bc90-f5e49f620cce	TypeError: Cannot read properties of undefined (reading 'authorization')
-20230417	02:50:41	169692a5-4491-4dd5-a42b-0d950e137b06	ReferenceError: decoded is not defined
-20230417	21:12:31	285f2743-f859-4f93-bd9d-f3feb73c687a	ReferenceError: origin is not defined
-20230417	21:14:04	d77810f7-1885-4a88-9540-c48e4a88fb5e	ReferenceError: origin is not defined
-20230417	21:14:54	c59143a9-49dc-477a-9d84-5afcddbb0599	ReferenceError: origin is not defined
-20230417	21:15:03	58873ee1-3aab-4efa-bbb0-550f8e3f2f9b	ReferenceError: origin is not defined
-20230417	21:15:09	0068b69a-839d-463a-8d78-12c899031c21	ReferenceError: origin is not defined
+20230425	20:39:56	5baaed26-bc7f-48cf-ae0b-fce58088b726	TypeError: req.rol.map is not a function
+20230425	20:40:45	3b1c4a6b-3ab8-47c4-ad5a-d17100ab0e96	TypeError: Cannot read properties of undefined (reading 'map')
+20230425	20:43:59	cd40d3c2-2991-4dc3-a2f9-014162c5ac91	TypeError: Cannot read properties of undefined (reading 'map')
+20230425	20:48:05	4632bf53-379a-410d-8a3a-ccd1eff83a4b	TypeError: req.rol.map is not a function
+20230425	21:12:50	347f5ee6-6588-4f70-bb91-6e744cee68c1	SyntaxError: Unexpected string in JSON at position 39
+20230425	22:04:22	74be5dce-a2d1-4614-8e9e-18f823c01e25	ReferenceError: userRoles is not defined

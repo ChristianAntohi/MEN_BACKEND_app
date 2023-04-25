@@ -1,17 +1,19 @@
 const User =  require('../model/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Int32 } = require('mongodb');
 
 const handleLogin = async (req, res) => {
     const cookies = req.cookies;
-    const { user, pwd } = req.body;
+    const { user, pwd} = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
     const foundUser = await User.findOne({ username: user }).exec();
     if (!foundUser) return res.sendStatus(401); //Unauthorized 
     // evaluate password 
     const match = await bcrypt.compare(pwd, foundUser.password);
     if (match) {
-        const roles = Object.values(foundUser.roles);
+        const roles = foundUser.roles;
+        console.log(roles);
         // create JWTs
         const accessToken = jwt.sign(
             {
@@ -19,9 +21,10 @@ const handleLogin = async (req, res) => {
                     "username": foundUser.username,
                     "roles": roles
                 }
+
             },
             process.env.ACCESS_TOKEN_SECRET,
-            {expiresIn: '60s'}
+            {expiresIn: '1d'}
         );
         const newRefreshToken = jwt.sign(
             {"username": foundUser.username},
@@ -61,7 +64,7 @@ const handleLogin = async (req, res) => {
         //Create Secure cookie with refresh token
         res.cookie('jwt', newRefreshToken, {httpOnly: true, sameSite: 'None', maxAge: 24*60*60*1000});
 
-        //Send authorization roles and acces token to user
+        //Send authorization rol and acces token to user
         res.json({roles, accessToken});
     } else {
         res.sendStatus(401);
