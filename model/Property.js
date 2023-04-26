@@ -30,7 +30,7 @@ const propertySchema = new Schema({
     type: String
   }],
   created_by: {
-    type: ObjectId,
+    type: String,
     required: true
   }
 });

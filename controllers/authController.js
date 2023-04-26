@@ -17,14 +17,14 @@ const handleLogin = async (req, res) => {
         // create JWTs
         const accessToken = jwt.sign(
             {
-                "UserInfo":{
+                "UserInfo": {
+                    "userId": foundUser._id.toString(),
                     "username": foundUser.username,
                     "roles": roles
-                }
-
+                },
             },
             process.env.ACCESS_TOKEN_SECRET,
-            {expiresIn: '1d'}
+            { expiresIn: '1d' }
         );
         const newRefreshToken = jwt.sign(
             {"username": foundUser.username},

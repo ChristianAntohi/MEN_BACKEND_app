@@ -4,3 +4,6 @@
 20230425	20:48:05	4632bf53-379a-410d-8a3a-ccd1eff83a4b	TypeError: req.rol.map is not a function
 20230425	21:12:50	347f5ee6-6588-4f70-bb91-6e744cee68c1	SyntaxError: Unexpected string in JSON at position 39
 20230425	22:04:22	74be5dce-a2d1-4614-8e9e-18f823c01e25	ReferenceError: userRoles is not defined
+20230426	00:20:17	06dd6299-2f64-414b-baa1-2e14632e6d38	TypeError: Cannot read properties of undefined (reading '_id')
+20230426	00:25:09	139d17c0-192f-4fe7-bbda-d8a97677ff40	TypeError: Cannot read properties of undefined (reading '_id')
+20230426	01:06:56	2407f592-cf2f-4bc4-b302-e9d315f95a90	SyntaxError: Unexpected token d in JSON at position 14
