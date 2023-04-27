@@ -1,18 +1,32 @@
-const property = require('../model/property');
 const Property = require('../model/property');
-const User = require('../model/User');
+const fs = require('fs');
+const upload = require('../middleware/upload');
 
 const addProperty = async (req, res) => {
-  const { name, description, location, contactInfo, numberOfBedrooms, numberOfBaths, images } = req.body;
-  const createdBy = [req.userId]; // get the user id from the decoded JWT
-  const property = new Property({ name, description, location, contactInfo, numberOfBedrooms, numberOfBaths, images, created_by: createdBy });
-  try {
-    await property.save();
-    res.status(201).json({ message: 'Property created successfully' });
-  } catch (error) {
-    res.status(400).json({ message: 'Failed to create property', error });
-  }
-console.log(property);
+  upload(req, res, async function (err) {
+    if (err) {
+      return res.status(400).json({ message: 'Failed to upload images', error: err });
+    }
+
+    const { name, description, location, contactInfo, numberOfBedrooms, numberOfBaths } = req.body;
+    const createdBy = req.userId; // get the user id from the decoded JWT
+    console.log(req.files);
+    const images = req.files.map(file => ({ filename: file.filename, path: file.path }));//get the filenames of the uploaded images
+    console.log(images); //console log the filenames of the uploaded images
+    const existingProperty = await Property.findOne({ name, location });
+    if (existingProperty) {
+      return res.status(400).json({ message: 'A property with the same fields already exists' });
+    }
+    const property = new Property({ name, description, location, contactInfo, numberOfBedrooms, numberOfBaths, images, created_by: createdBy });
+
+    try {
+      await property.save();
+      console.log(property); // log the property object after it is saved
+      res.status(201).json({ message: 'Property created successfully' });
+    } catch (error) {
+      res.status(400).json({ message: 'Failed to create property', error });
+    }
+  });
 };
 
 
@@ -65,6 +79,7 @@ const updateProperty = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
+
 };
 
 

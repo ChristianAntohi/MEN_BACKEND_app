@@ -1,25 +1,42 @@
-const multer = require('multer');
 
-// Configurarea locației și a numelui fișierelor pentru a salva imaginile
+const multer = require('multer');
+const path = require('path');
+
+// Set storage engine
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './uploads/');
+    cb(null,'uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
 
-// Configurarea filtrului de tip de fișier pentru a accepta doar imagini
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image/')) {
-    cb(null, true);
-  } else {
-    cb(new Error('Formatul fișierului nu este acceptat!'), false);
+// Initialize upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10000000 }, // 5 MB file size limit
+  fileFilter: function(req, file, cb) {
+    checkFileType(file, cb);
   }
-};
+}).array('images', 5); // accept up to 5 images with fieldname 'images'
 
-// Configurarea middleware-ului Multer pentru a încărca imagini
-const upload = multer({ storage: storage, fileFilter: fileFilter, limits: { fileSize: 1024 * 1024 * 5 } });
+// Check file type
+function checkFileType(file, cb) {
+  // Allowed file extensions
+  const filetypes = /jpeg|jpg|png|gif/;
+
+  // Check extension
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+  // Check mime type
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (extname && mimetype) {
+    return cb(null, true);
+  } else {
+    cb('Error: Images Only!');
+  }
+}
 
 module.exports = upload;

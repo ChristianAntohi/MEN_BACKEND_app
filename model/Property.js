@@ -26,9 +26,12 @@ const propertySchema = new Schema({
     type: Number,
     required: true
   },
-  images: [{
-    type: String
-  }],
+  images: [
+    {
+      filename: { type: String },
+      path: { type: String }
+    }
+  ],
   created_by: {
     type: String,
     required: true

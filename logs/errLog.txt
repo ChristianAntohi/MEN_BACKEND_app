@@ -7,3 +7,22 @@
 20230426	00:20:17	06dd6299-2f64-414b-baa1-2e14632e6d38	TypeError: Cannot read properties of undefined (reading '_id')
 20230426	00:25:09	139d17c0-192f-4fe7-bbda-d8a97677ff40	TypeError: Cannot read properties of undefined (reading '_id')
 20230426	01:06:56	2407f592-cf2f-4bc4-b302-e9d315f95a90	SyntaxError: Unexpected token d in JSON at position 14
+20230426	22:58:41	998cfc0d-be94-4f4d-94be-1c0c717092dd	PayloadTooLargeError: request entity too large
+20230426	22:59:26	a2d87cc0-3cb9-42ae-9da0-797833d47c7d	PayloadTooLargeError: request entity too large
+20230426	22:59:40	3566e34e-453f-4873-ac22-7c994880bca8	PayloadTooLargeError: request entity too large
+20230426	22:59:46	dc1f48e3-a8ce-4d77-a8bc-c6544f3f70a9	PayloadTooLargeError: request entity too large
+20230426	23:07:24	920167f1-ee63-48b5-b964-ea8b8a2c7918	PayloadTooLargeError: request entity too large
+20230426	23:49:09	5a3c347f-8743-4d86-b5c7-39ea17e672ed	TypeError: Cannot read properties of undefined (reading 'length')
+20230427	00:02:35	2db38baa-5d46-4098-8c0a-b26996e6f5dd	TypeError: Cannot read properties of undefined (reading 'length')
+20230427	00:06:27	d064cc0d-e5d6-48e6-97f8-fe30b56f6cb1	MulterError: Unexpected field
+20230427	00:06:40	e00298cc-2b07-4655-a590-34c193f978ee	MulterError: Unexpected field
+20230427	00:07:38	64b50e09-b960-44cb-8dd4-efcf74561582	MulterError: Unexpected field
+20230427	00:24:18	b4fad2fb-7d31-4045-b502-96d009de2922	MulterError: Unexpected field
+20230427	00:26:31	80db24af-5065-4e70-bcb9-9da69bc37a79	Error: Unexpected end of form
+20230427	00:32:47	008003f5-79ce-40d4-b073-d6738014cd6e	MulterError: Unexpected field
+20230427	00:35:30	7ae5bcc7-eb8b-441e-96de-a8d9330f0c57	SyntaxError: Unexpected token d in JSON at position 1
+20230427	00:35:38	3aad3ff2-a5e8-46c0-a222-742805f45ae6	SyntaxError: Unexpected token d in JSON at position 4
+20230427	20:15:03	18a93dea-ebb3-42d1-a01d-659cd5e71ab8	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\uploads\images-1682615703921.jpg'
+20230427	20:15:49	4e013dbd-2041-4cd9-bcc3-6c04d5075702	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\uploads\images-1682615749271.jpg'
+20230427	20:39:32	b822a5a8-5c88-4edd-a213-da2d50d804e7	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\middleware\uploads\images-1682617172184.jpg'
+20230427	20:40:33	2f136d6d-9b84-480e-b84b-c35a7522ab1d	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\middleware\uploads\images-1682617233070.jpg'

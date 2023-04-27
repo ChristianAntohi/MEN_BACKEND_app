@@ -13,8 +13,6 @@ const verifyJWT = (req, res, next) => {
             req.userId = decoded.UserInfo.userId;
             req.user = decoded.UserInfo.username;
             req.roles = decoded.UserInfo.roles;
-            console.log('decoded.UserInfo.roles:', decoded.UserInfo.roles);
-            console.log('decoded info from token:', req.user, req.roles, req.userId);
             next();
         }
     );

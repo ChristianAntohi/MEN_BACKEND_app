@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const cors = require('cors');
@@ -12,10 +13,12 @@ const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
 const PORT = process.env.PORT || 3500;
-
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //connect to mongodb
 connectDB();
-
+//Serve static files from the "public" directory
+app.use(express.static(__dirname + '/public'));
 // custom middleware logger
 app.use(logger);
 
