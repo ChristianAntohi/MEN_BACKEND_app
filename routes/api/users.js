@@ -18,7 +18,7 @@ router.route('/:id')
     .put(verifyRole([2]), usersController.updateUser);
     //route for changing the password for the user logged
 router.route('/change_password')
-    .put(verifyRole([1, 2]), changePassController);
+    .put(verifyRole([0, 1, 2]), changePassController);
 
 
 module.exports = router;
