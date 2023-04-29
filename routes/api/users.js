@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../../controllers/usersController');
 const verifyRole = require('../../middleware/verifyRole');
+const changePassController = require('../../controllers/changePassController');
 
 router.route('/')
 //get all users from db
@@ -15,8 +16,9 @@ router.route('/:id')
     .get(verifyRole([2]), usersController.getUser)
     // Update an existing user by id
     .put(verifyRole([2]), usersController.updateUser);
-
-
+    //route for changing the password for the user logged
+router.route('/change_password')
+    .put(verifyRole([1, 2]), changePassController);
 
 
 module.exports = router;

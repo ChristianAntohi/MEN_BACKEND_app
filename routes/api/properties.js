@@ -16,6 +16,6 @@ router.route('/:id')
       .get(propertiesController.getPropertybyId);
 
       //search route for searchProperties controller
-router.get('/search', searchProperties);
+router.get('/search', propertiesController.searchProperties);
 
       module.exports = router;
