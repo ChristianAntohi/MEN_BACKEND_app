@@ -13,7 +13,7 @@ router.route('/')
       // Update a property
       .put(verifyRole([1, 2]), propertiesController.updateProperty);
 router.route('/:id')
-      .get(verifyRole([0, 1, 2]), propertiesController.getPropertybyId);
+      .get(propertiesController.getPropertybyId);
 
       //search route for searchProperties controller
 router.get('/search', searchProperties);
