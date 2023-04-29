@@ -69,7 +69,6 @@ const updateProperty = async (req, res) => {
     property.contactInfo = req.body.contactInfo;
     property.numberOfBedrooms = req.body.numberOfBedrooms;
     property.numberOfBaths = req.body.numberOfBaths;
-    property.images = req.body.images;
 
     // Save updated property to database
     const updatedProperty = await property.save();
@@ -81,10 +80,66 @@ const updateProperty = async (req, res) => {
   }
 
 };
+const getPropertybyId = async (req, res) => {
+  try {
+    const property = await Property.findById(req.params.id);
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+
+    // Create an array of image URLs based on the file paths stored in the images field
+    const imageUrls = property.images.map(image => `${req.protocol}://${req.get('host')}/${image.path}`);
+
+    res.status(200).json({ property, imageUrls });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to get property', error });
+  }
+};
+const getAllProperties = async (req, res) => {
+  try {
+    const properties = await Property.find();
+    const propertiesWithImageUrls = properties.map(property => {
+      const imageUrls = property.images.map(image => `${req.protocol}://${req.get('host')}/${image.path}`);
+      return { ...property.toObject(), imageUrls };
+    });
+    res.status(200).json({ properties: propertiesWithImageUrls });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to get properties', error });
+  }
+};
+const searchProperties = async (req, res) => {
+  try {
+    const { searchQuery } = req.query;
+    const properties = await Property.find({
+      $or: [
+        { name: { $regex: searchQuery, $options: 'i' } },
+        { description: { $regex: searchQuery, $options: 'i' } },
+        { numberOfBedrooms: searchQuery }
+      ]
+    });
+    
+    if (properties.length === 0) {
+      return res.status(404).json({ message: 'No properties found' });
+    }
+
+    // Create an array of image URLs based on the file paths stored in the images field
+    const propertiesWithImages = await Promise.all(properties.map(async property => {
+      const imageUrls = property.images.map(image => `${req.protocol}://${req.get('host')}/${image.path}`);
+      return { ...property._doc, imageUrls };
+    }));
+
+    res.status(200).json({ properties: propertiesWithImages });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to search properties', error });
+  }
+};
 
 
 module.exports = {
   addProperty,
   deleteProperty,
-  updateProperty
+  updateProperty,
+  getPropertybyId,
+  getAllProperties,
+  searchProperties
 }
