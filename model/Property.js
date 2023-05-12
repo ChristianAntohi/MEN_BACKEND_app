@@ -18,20 +18,16 @@ const propertySchema = new Schema({
     type: String,
     required: true
   },
-  numberOfBedrooms: {
-    type: Number,
-    required: true
-  },
-  numberOfBaths: {
-    type: Number,
-    required: true
-  },
-  images: [
+  
+  price:{
+      type: String,
+      required: true
+    },
+  images:
     {
       filename: { type: String },
       path: { type: String }
-    }
-  ],
+    },
   created_by: {
     type: String,
     required: true

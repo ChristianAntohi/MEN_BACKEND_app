@@ -5,7 +5,7 @@ const path = require('path');
 // Set storage engine
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null,'uploads/');
+    cb(null,'./public/uploads/');
   },
   filename: function(req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -15,11 +15,11 @@ const storage = multer.diskStorage({
 // Initialize upload
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10000000 }, // 5 MB file size limit
+  limits: { fileSize: 10000000 }, // 10 MB file size limit
   fileFilter: function(req, file, cb) {
     checkFileType(file, cb);
   }
-}).array('images', 5); // accept up to 5 images with fieldname 'images'
+}).single('images');
 
 // Check file type
 function checkFileType(file, cb) {

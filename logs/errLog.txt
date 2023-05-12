@@ -26,3 +26,6 @@
 20230427	20:15:49	4e013dbd-2041-4cd9-bcc3-6c04d5075702	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\uploads\images-1682615749271.jpg'
 20230427	20:39:32	b822a5a8-5c88-4edd-a213-da2d50d804e7	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\middleware\uploads\images-1682617172184.jpg'
 20230427	20:40:33	2f136d6d-9b84-480e-b84b-c35a7522ab1d	Error: ENOENT: no such file or directory, open 'C:\Users\kriss\Desktop\nodejsbookingapp\middleware\uploads\images-1682617233070.jpg'
+20230430	15:46:41	b4207bd1-9d37-4ca6-a5b6-79af92656396	SyntaxError: Unexpected token A in JSON at position 7
+20230430	15:48:41	d4ed86dd-1dd3-48cb-9a97-d36bc592b261	SyntaxError: Unexpected token } in JSON at position 30
+20230509	22:32:32	6a9eeb1c-791d-44b9-9ad0-2494ac3a49d4	Error: Not allowed by CORS

@@ -5,10 +5,10 @@ const { Int32 } = require('mongodb');
 
 const handleLogin = async (req, res) => {
     const cookies = req.cookies;
-    const { user, pwd} = req.body;
+    const { user, pwd } = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
     const foundUser = await User.findOne({ username: user }).exec();
-    if (!foundUser) return res.sendStatus(401); //Unauthorized 
+    if (!foundUser) return res.sendStatus(401).json({'message': 'Username or password are incorrect'}); //Unauthorized 
     // evaluate password 
     const match = await bcrypt.compare(pwd, foundUser.password);
     if (match) {
@@ -63,8 +63,8 @@ const handleLogin = async (req, res) => {
         //Create Secure cookie with refresh token
         res.cookie('jwt', newRefreshToken, {httpOnly: true, sameSite: 'None', maxAge: 24*60*60*1000});
 
-        //Send authorization rol and acces token to user
-        res.json({roles, accessToken});
+        //Send authorization role and acces token to user
+        res.json({roles, foundUser, accessToken});
     } else {
         res.sendStatus(401);
     }

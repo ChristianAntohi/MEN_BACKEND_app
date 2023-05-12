@@ -8,16 +8,20 @@ const addProperty = async (req, res) => {
       return res.status(400).json({ message: 'Failed to upload images', error: err });
     }
 
-    const { name, description, location, contactInfo, numberOfBedrooms, numberOfBaths } = req.body;
+    const { name, description, location, contactInfo, price} = req.body;
     const createdBy = req.userId; // get the user id from the decoded JWT
-    console.log(req.files);
-    const images = req.files.map(file => ({ filename: file.filename, path: file.path }));//get the filenames of the uploaded images
+    console.log(req.file);
+      //get the filenames of the uploaded images
+    const images = {
+      filename: req.file.filename,
+      path: req.file.path.substring('/public'.length)
+    };
     console.log(images); //console log the filenames of the uploaded images
     const existingProperty = await Property.findOne({ name, location });
     if (existingProperty) {
       return res.status(400).json({ message: 'A property with the same fields already exists' });
     }
-    const property = new Property({ name, description, location, contactInfo, numberOfBedrooms, numberOfBaths, images, created_by: createdBy });
+    const property = new Property({ name, description, location, contactInfo, price, images, created_by: createdBy });
 
     try {
       await property.save();
@@ -66,9 +70,8 @@ const updateProperty = async (req, res) => {
     property.name = req.body.name;
     property.description = req.body.description;
     property.location = req.body.location;
+    property.price = req.body.price;
     property.contactInfo = req.body.contactInfo;
-    property.numberOfBedrooms = req.body.numberOfBedrooms;
-    property.numberOfBaths = req.body.numberOfBaths;
 
     // Save updated property to database
     const updatedProperty = await property.save();
@@ -80,41 +83,48 @@ const updateProperty = async (req, res) => {
   }
 
 };
-const getPropertybyId = async (req, res) => {
-  try {
-    const property = await Property.findById(req.params.id);
+const getPropertybyUserId = async (req, res) => {
+  try { 
+    const property = await Property.find({created_by: req.userId});
     if (!property) {
       return res.status(404).json({ message: 'Property not found' });
     }
-
-    // Create an array of image URLs based on the file paths stored in the images field
-    const imageUrls = property.images.map(image => `${req.protocol}://${req.get('host')}/${image.path}`);
-
-    res.status(200).json({ property, imageUrls });
+    res.status(200).json({ property });
   } catch (error) {
     res.status(500).json({ message: 'Failed to get property', error });
   }
 };
 const getAllProperties = async (req, res) => {
   try {
+    console.log("Fetching properties...");
     const properties = await Property.find();
-    const propertiesWithImageUrls = properties.map(property => {
-      const imageUrls = property.images.map(image => `${req.protocol}://${req.get('host')}/${image.path}`);
-      return { ...property.toObject(), imageUrls };
+    console.log("Properties fetched successfully!");
+    const result = properties.map(property => {
+      return {
+        id: property._id,
+        name: property.name,
+        description: property.description,
+        location: property.location,
+        contactInfo: property.contactInfo,
+        price: property.price,
+        images: property.images.path, // Return only the image paths
+        created_by: property.created_by
+      }
     });
-    res.status(200).json({ properties: propertiesWithImageUrls });
+    res.status(200).json(result);
   } catch (error) {
+    console.log("Error while fetching properties:", error);
     res.status(500).json({ message: 'Failed to get properties', error });
   }
 };
 const searchProperties = async (req, res) => {
   try {
-    const { searchQuery } = req.query;
+    const {searchQuery} = req.query;
+    console.log(searchQuery);
     const properties = await Property.find({
       $or: [
         { name: { $regex: searchQuery, $options: 'i' } },
-        { description: { $regex: searchQuery, $options: 'i' } },
-        { numberOfBedrooms: searchQuery }
+        { description: { $regex: searchQuery, $options: 'i' } }
       ]
     });
     
@@ -122,15 +132,20 @@ const searchProperties = async (req, res) => {
       return res.status(404).json({ message: 'No properties found' });
     }
 
-    // Create an array of image URLs based on the file paths stored in the images field
-    const propertiesWithImages = await Promise.all(properties.map(async property => {
-      const imageUrls = property.images.map(image => `${req.protocol}://${req.get('host')}/${image.path}`);
-      return { ...property._doc, imageUrls };
-    }));
-
-    res.status(200).json({ properties: propertiesWithImages });
+    res.status(200).json({properties});
   } catch (error) {
     res.status(500).json({ message: 'Failed to search properties', error });
+  }
+};
+const getPropertybyId = async (req, res) => {
+  try { 
+    const property = await Property.findById({_id: req.params.id });
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+    res.status(200).json({ property });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to get property', error });
   }
 };
 
@@ -139,7 +154,8 @@ module.exports = {
   addProperty,
   deleteProperty,
   updateProperty,
-  getPropertybyId,
+  getPropertybyUserId,
   getAllProperties,
-  searchProperties
+  searchProperties,
+  getPropertybyId
 }

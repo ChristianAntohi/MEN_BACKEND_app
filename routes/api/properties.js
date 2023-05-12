@@ -6,16 +6,12 @@ const verifyRole = require('../../middleware/verifyRole');
 router.route('/')
       // Add a property
       .post(verifyRole([1, 2]), propertiesController.addProperty)
-      //Get all properties from database with imageURLs stored in image field for every user on UI
-      .get(propertiesController.getAllProperties)
+      //get property by user id
+      .get(verifyRole([1, 2]), propertiesController.getPropertybyUserId)
       // Delete a property
       .delete(verifyRole([1, 2]), propertiesController.deleteProperty)
       // Update a property
       .put(verifyRole([1, 2]), propertiesController.updateProperty);
-router.route('/:id')
-      .get(propertiesController.getPropertybyId);
 
-      //search route for searchProperties controller
-router.get('/search', propertiesController.searchProperties);
 
-      module.exports = router;
+module.exports = router;

@@ -47,6 +47,9 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+app.use('/getProperties', require('./routes/getProperties'));
+app.use('/searchProperties', require('./routes/searchProperties'));
+
 
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
