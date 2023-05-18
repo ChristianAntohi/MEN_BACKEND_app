@@ -46,17 +46,19 @@ const handleRefreshToken = async (req, res) => {
             }
             if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
             //Refresh token was still valid
-            const roles = Object.values(foundUser.roles);
+            const roles = foundUser.roles;
             const accessToken = jwt.sign(
                 { 
                    "UserInfo":{    
                       "username": decoded.username,
                       "roles": roles
                     }
+                    
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10s'}
+                { expiresIn: '1d'}
             );
+            console.log(roles);
             const newRefreshToken = jwt.sign(
                 {"username": foundUser.username},
                 process.env.REFRESH_TOKEN_SECRET,
@@ -65,11 +67,8 @@ const handleRefreshToken = async (req, res) => {
             //saving refreshtoken with current user 
             foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
             const result = await foundUser.save();
-
-            //Create Secure cookie with refresh token
-            res.cookie('jwt', newRefreshToken, {httpOnly: true, sameSite: 'None', maxAge: 24*60*60*1000});
-
-            res.json({roles, accessToken});
+            //Send role, accessToken and refreshToken to the client side
+            res.json({ roles, accessToken, refreshToken: newRefreshToken });
 
         }
     );

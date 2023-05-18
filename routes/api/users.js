@@ -15,7 +15,7 @@ router.route('/')
 router.route('/:id')
     .get(verifyRole([2]), usersController.getUser)
     // Update an existing user by id
-    .put(verifyRole([2]), usersController.updateUser);
+    .put(verifyRole([1, 2]), usersController.updateUser);
     //route for changing the password for the user logged
 router.route('/change_password')
     .put(verifyRole([0, 1, 2]), changePassController);
