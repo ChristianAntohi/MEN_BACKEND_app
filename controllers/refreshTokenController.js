@@ -43,10 +43,12 @@ const handleRefreshToken = async (req, res) => {
         if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
         // Refresh token was still valid
         const roles = foundUser.roles;
+        const username = foundUser.username;
+        const userId = foundUser._id;
         const accessToken = jwt.sign(
           { 
             "UserInfo":{    
-              "username": decoded.username,
+              "username": username,
               "roles": roles
             }   
           },
@@ -63,7 +65,7 @@ const handleRefreshToken = async (req, res) => {
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
         const result = await foundUser.save();
         // Send role, accessToken, and refreshToken to the client side
-        res.json({ roles, accessToken, refreshToken: newRefreshToken });
+        res.json({ roles, username, userId, accessToken, refreshToken: newRefreshToken });
       }
     );
   }
