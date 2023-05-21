@@ -2,8 +2,9 @@ const bcrypt = require('bcrypt');
 const User = require('../model/User');
 
 const changePassword = async (req, res) => {
-    const { currentPassword, newPassword } = req.body;
+    const { currentPassword, newPassword} = req.body;
     const userId = req.userId;
+    console.log(userId, currentPassword, newPassword);
   
     // Retrieve the user's current password hash from the database
     const user = await User.findById(userId);

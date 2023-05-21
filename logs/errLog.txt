@@ -42,3 +42,4 @@
 20230517	21:33:50	644c41d7-2280-41a4-8caa-5189e730778e	SyntaxError: Unexpected token C in JSON at position 0
 20230517	21:33:59	3c5d08cd-0766-4611-a7ad-fcf2258c534f	SyntaxError: Unexpected token C in JSON at position 0
 20230521	20:45:14	d9637f3e-5820-4cc4-83bf-147485460a67	SyntaxError: Unexpected token e in JSON at position 63
+20230522	01:18:15	49ece670-54da-4013-aa75-d85e13bf0578	ReferenceError: roles is not defined

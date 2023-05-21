@@ -49,7 +49,8 @@ const handleRefreshToken = async (req, res) => {
           { 
             "UserInfo":{    
               "username": username,
-              "roles": roles
+              "roles": roles,
+              "userId": userId
             }   
           },
           process.env.ACCESS_TOKEN_SECRET,
@@ -64,6 +65,7 @@ const handleRefreshToken = async (req, res) => {
         // Saving refreshtoken with current user 
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
         const result = await foundUser.save();
+        console.log(accessToken);
         // Send role, accessToken, and refreshToken to the client side
         res.json({ roles, username, userId, accessToken, refreshToken: newRefreshToken });
       }
