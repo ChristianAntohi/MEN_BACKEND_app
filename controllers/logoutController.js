@@ -17,7 +17,6 @@ const handleLogout = async (req, res) => {
     // Clear all refresh tokens from the user
     foundUser.refreshToken = [];
     const result = await foundUser.save();
-    console.log(result);
   
     res.sendStatus(204);
   }

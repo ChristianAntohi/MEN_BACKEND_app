@@ -934,3 +934,11 @@
 20230521	21:22:36	dba6b0f6-971e-4897-8a90-f30b09dbb160	PUT	undefined	/changepass
 20230521	21:22:40	b1d99a05-a626-4bb0-9d1e-2cbe83e36983	POST	undefined	/auth
 20230521	21:22:44	cf5847bf-c207-40e4-8250-c4bacbf4cb91	POST	undefined	/auth
+20230521	21:36:43	0deb0c1c-7674-420b-96ec-3220dfe40817	POST	undefined	/register/
+20230521	21:37:09	ef269a6a-ef68-4d57-bc9a-3c07934c5d97	POST	undefined	/register/
+20230521	21:37:25	3132d6e7-4173-4adb-b94f-d123b954031c	POST	undefined	/register/
+20230521	21:37:40	3d8b243c-efa0-457a-833a-94b357960366	POST	undefined	/auth/
+20230521	21:37:47	e071573b-74a2-4d06-b42a-d1120fcba7b1	POST	undefined	/refresh/
+20230521	21:37:52	48432c3e-e69b-495d-acb7-fff83c1118fa	POST	undefined	/logout/
+20230521	22:27:38	c2479e42-5e59-4e7b-9305-3be295a87c43	POST	undefined	/auth
+20230521	22:28:22	e7c9731a-0fe0-4261-834c-1e058d81fe0b	POST	undefined	/changepass
