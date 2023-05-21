@@ -119,20 +119,44 @@ const getAllProperties = async (req, res) => {
 };
 const searchProperties = async (req, res) => {
   try {
-    const {searchQuery} = req.query;
-    console.log(searchQuery);
-    const properties = await Property.find({
-      $or: [
-        { name: { $regex: searchQuery, $options: 'i' } },
-        { description: { $regex: searchQuery, $options: 'i' } }
-      ]
-    });
-    
+    const { name, description, minPrice, maxPrice, location } = req.query;
+    console.log(name, description, minPrice, maxPrice, location);
+
+    // Build the search criteria
+    const searchCriteria = {};
+
+    // Add the name search query parameter
+    if (name) {
+      searchCriteria.name = { $regex: name, $options: 'i' };
+    }
+
+    // Add the description search query parameter
+    if (description) {
+      searchCriteria.description = { $regex: description, $options: 'i' };
+    }
+
+    // Add the price range search query parameters
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      searchCriteria.price = { $gte: minPrice, $lte: maxPrice };
+    } else if (minPrice !== undefined) {
+      searchCriteria.price = { $gte: minPrice };
+    } else if (maxPrice !== undefined) {
+      searchCriteria.price = { $lte: maxPrice };
+    }
+
+    // Add the location search query parameter
+    if (location) {
+      searchCriteria.location = { $regex: location, $options: 'i' };
+    }
+
+    // Perform the search using the constructed criteria
+    const properties = await Property.find(searchCriteria);
+
     if (properties.length === 0) {
       return res.status(404).json({ message: 'No properties found' });
     }
 
-    res.status(200).json({properties});
+    res.status(200).json({ properties });
   } catch (error) {
     res.status(500).json({ message: 'Failed to search properties', error });
   }
