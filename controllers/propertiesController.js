@@ -148,6 +148,16 @@ const searchProperties = async (req, res) => {
     if (location) {
       searchCriteria.location = { $regex: location, $options: 'i' };
     }
+    
+    // Add the search text query parameter for all fields
+    if (searchText) {
+      const searchTextRegex = new RegExp(searchText, 'i');
+      searchCriteria.$or = [
+        { name: searchTextRegex },
+        { description: searchTextRegex },
+        { location: searchTextRegex }
+      ];
+    }
 
     // Perform the search using the constructed criteria
     const properties = await Property.find(searchCriteria);

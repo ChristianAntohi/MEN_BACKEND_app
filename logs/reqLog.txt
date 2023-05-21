@@ -942,3 +942,10 @@
 20230521	21:37:52	48432c3e-e69b-495d-acb7-fff83c1118fa	POST	undefined	/logout/
 20230521	22:27:38	c2479e42-5e59-4e7b-9305-3be295a87c43	POST	undefined	/auth
 20230521	22:28:22	e7c9731a-0fe0-4261-834c-1e058d81fe0b	POST	undefined	/changepass
+20230521	23:46:26	5f93e87b-feaf-4f50-a71d-e974ae51ad53	POST	undefined	/register/
+20230521	23:46:41	4786e731-f5d1-4849-b60c-b4e2035788fb	POST	undefined	/auth/
+20230521	23:46:47	778e08b1-d5a1-4de1-9fa0-4aff0e866fcf	POST	undefined	/refresh/
+20230521	23:46:55	5bc7bad8-9d20-44f4-bb61-bab606374ee4	POST	undefined	/refresh/
+20230521	23:47:10	9f66a484-7644-4fbe-bab1-61f18c646ede	POST	undefined	/changepass/
+20230521	23:52:07	f0776941-8f7c-471e-8de3-16ced1f0d8f4	GET	undefined	/favicon.ico
+20230521	23:54:20	7b3e6ff4-bf12-4edc-beb3-c08a82739b97	POST	undefined	/changepass
