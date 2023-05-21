@@ -8,7 +8,7 @@ router.route('/')
 //get all users from db
     .get(verifyRole([2]), usersController.getAllUsers)
     //delete user by id
-    .delete(verifyRole([2]), usersController.deleteUser)
+    .delete(verifyRole([0, 1, 2]), usersController.deleteUser)
     //create new user
     .post(verifyRole([2]), usersController.createUser);
     //get user by id
