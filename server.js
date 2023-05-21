@@ -54,6 +54,8 @@ app.use('/searchProperties', require('./routes/searchProperties'));
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
 app.use('/properties', require('./routes/api/properties'));
+app.use('/changepass', require('./routes/changepass'));
+
 
 app.all('*', (req, res) => {
     res.status(404);
