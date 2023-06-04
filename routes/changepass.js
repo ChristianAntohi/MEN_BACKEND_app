@@ -7,5 +7,4 @@ const changePassController = require('../controllers/changePassController');
 router.route('/')
     .post(verifyRole([0,1,2]), changePassController);
 
-
 module.exports = router;

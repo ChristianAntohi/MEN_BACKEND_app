@@ -1,5 +1,3 @@
-
-
 const verifyRole = (allowedRole) => {
     return (req, res, next) => {
       const userRole = req?.roles;
@@ -11,3 +9,4 @@ const verifyRole = (allowedRole) => {
   }
   
   module.exports = verifyRole;
+  

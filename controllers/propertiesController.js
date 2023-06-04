@@ -10,13 +10,11 @@ const addProperty = async (req, res) => {
 
     const { name, description, location, contactInfo, price} = req.body;
     const createdBy = req.userId; // get the user id from the decoded JWT
-    console.log(req.file);
       //get the filenames of the uploaded images
     const images = {
       filename: req.file.filename,
       path: req.file.path.substring('/public'.length)
     };
-    console.log(images); //console log the filenames of the uploaded images
     const existingProperty = await Property.findOne({ name, location });
     if (existingProperty) {
       return res.status(400).json({ message: 'A property with the same fields already exists' });
@@ -117,25 +115,30 @@ const getAllProperties = async (req, res) => {
     res.status(500).json({ message: 'Failed to get properties', error });
   }
 };
+
 const searchProperties = async (req, res) => {
   try {
-    const { name, description, minPrice, maxPrice, location } = req.query;
-    console.log(name, description, minPrice, maxPrice, location);
+    const { name, description, minPrice, maxPrice, location, searchText, propertyID } = req.query;
+    console.log(name, description, minPrice, maxPrice, location, searchText, propertyID);
 
-    // Build the search criteria
+  // Build the search criteria
     const searchCriteria = {};
 
-    // Add the name search query parameter
+  // Add the propertyID search query parameter
+    if (propertyID) {
+    searchCriteria._id = propertyID;
+    }
+  // Add the name search query parameter
     if (name) {
       searchCriteria.name = { $regex: name, $options: 'i' };
     }
 
-    // Add the description search query parameter
+  // Add the description search query parameter
     if (description) {
       searchCriteria.description = { $regex: description, $options: 'i' };
     }
 
-    // Add the price range search query parameters
+  // Add the price range search query parameters
     if (minPrice !== undefined && maxPrice !== undefined) {
       searchCriteria.price = { $gte: minPrice, $lte: maxPrice };
     } else if (minPrice !== undefined) {
@@ -144,12 +147,11 @@ const searchProperties = async (req, res) => {
       searchCriteria.price = { $lte: maxPrice };
     }
 
-    // Add the location search query parameter
+  // Add the location search query parameter
     if (location) {
       searchCriteria.location = { $regex: location, $options: 'i' };
-    }
-    
-    // Add the search text query parameter for all fields
+    } 
+  // Add the search text query parameter for all fields
     if (searchText) {
       const searchTextRegex = new RegExp(searchText, 'i');
       searchCriteria.$or = [
@@ -159,7 +161,7 @@ const searchProperties = async (req, res) => {
       ];
     }
 
-    // Perform the search using the constructed criteria
+  // Perform the search using the constructed criteria
     const properties = await Property.find(searchCriteria);
 
     if (properties.length === 0) {
@@ -171,17 +173,6 @@ const searchProperties = async (req, res) => {
     res.status(500).json({ message: 'Failed to search properties', error });
   }
 };
-const getPropertybyId = async (req, res) => {
-  try { 
-    const property = await Property.findById({_id: req.params.id });
-    if (!property) {
-      return res.status(404).json({ message: 'Property not found' });
-    }
-    res.status(200).json({ property });
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to get property', error });
-  }
-};
 
 
 module.exports = {
@@ -190,6 +181,5 @@ module.exports = {
   updateProperty,
   getPropertybyUserId,
   getAllProperties,
-  searchProperties,
-  getPropertybyId
+  searchProperties
 }

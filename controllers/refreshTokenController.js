@@ -2,7 +2,6 @@ const User =  require('../model/User');
 const jwt = require('jsonwebtoken');
 
 
-
 const handleRefreshToken = async (req, res) => {
     const { refreshToken } = req.body;
     
@@ -66,7 +65,7 @@ const handleRefreshToken = async (req, res) => {
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
         const result = await foundUser.save();
         console.log(accessToken);
-        // Send role, accessToken, and refreshToken to the client side
+        // Send role, accessToken, username, userId and refreshToken to the client side
         res.json({ roles, username, userId, accessToken, refreshToken: newRefreshToken });
       }
     );

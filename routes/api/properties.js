@@ -13,5 +13,4 @@ router.route('/')
       // Update a property
       .put(verifyRole([1, 2]), propertiesController.updateProperty);
 
-
 module.exports = router;

@@ -42,7 +42,6 @@ const handleLogin = async (req, res) => {
     foundUser.refreshToken.push(newRefreshToken); // Store the new refresh token in the array
     const result = await foundUser.save();
 
-
     res.json({ roles, foundUser, newRefreshToken, accessToken });
   } else {
     res.sendStatus(401);

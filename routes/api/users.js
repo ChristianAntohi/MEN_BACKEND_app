@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../../controllers/usersController');
 const verifyRole = require('../../middleware/verifyRole');
-const changePassController = require('../../controllers/changePassController');
 
 router.route('/')
 //get all users from db
@@ -19,3 +18,4 @@ router.route('/:id')
 
 
 module.exports = router;
+

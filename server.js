@@ -8,7 +8,6 @@ const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
 const verifyJWT = require('./middleware/verifyJWT');
-const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
@@ -35,9 +34,6 @@ app.use(express.urlencoded({ extended: false }));
 // built-in middleware for json 
 app.use(express.json());
 
-//middleware for cookies
-app.use(cookieParser());
-
 //serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
 
@@ -47,10 +43,9 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
-app.use('/getProperties', require('./routes/getProperties'));
 app.use('/searchProperties', require('./routes/searchProperties'));
 
-
+//verify json web token from call api authorization headers before accessing the routes below
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
 app.use('/properties', require('./routes/api/properties'));
@@ -74,3 +69,4 @@ mongoose.connection.once('open', ()=> {
     console.log('connected to mongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
+

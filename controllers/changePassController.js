@@ -22,4 +22,6 @@ const changePassword = async (req, res) => {
   
     res.status(200).json({ message: 'Password changed successfully' });
   };
+
   module.exports = changePassword;
+  

@@ -1,10 +1,8 @@
 const User =  require('../model/User');
 
 
-
-
 const handleLogout = async (req, res) => {
-    // On the client, also delete accessToken
+
     const { refreshToken } = req.body;
   
     if (!refreshToken) return res.sendStatus(204); // No content
@@ -22,3 +20,4 @@ const handleLogout = async (req, res) => {
   }
 
 module.exports = { handleLogout };
+
