@@ -11,7 +11,7 @@ const verifyJWT = require('./middleware/verifyJWT');
 const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 8080;
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //connect to mongodb
@@ -45,11 +45,10 @@ app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
 app.use('/searchProperties', require('./routes/searchProperties'));
 
-//verify json web token from call api authorization headers before accessing the routes below
+//verify json web token from api call
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
 app.use('/properties', require('./routes/api/properties'));
-app.use('/changepass', require('./routes/changepass'));
 
 
 app.all('*', (req, res) => {
@@ -69,4 +68,5 @@ mongoose.connection.once('open', ()=> {
     console.log('connected to mongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
+
 
